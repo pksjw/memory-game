@@ -1,3 +1,8 @@
+
+// Define global constants
+
+const deck = document.getElementById('deck');
+
 /*
  * Create a list that holds all of your cards
  */
@@ -26,6 +31,7 @@ function shuffle(array) {
 }
 
 
+
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -36,3 +42,22 @@ function shuffle(array) {
  *    + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
+
+deck.addEventListener("click", function(event) {
+    event.preventDefault();
+    if(event.target.nodeName === "LI") {
+        // let's flip the card :)
+        if(event.target.classList.contains('match') ||
+           event.target.classList.contains('open')  ||
+           event.target.classList.contains('show')) {
+            console.log("already open");
+        } else {
+            console.log("not open");
+            event.target.classList.add('open', 'show');
+        }
+        console.log("li!");
+    } else {
+        console.log(`not li, it's ${event.target.nodeName}`);
+    }
+
+}, false);
