@@ -14,9 +14,29 @@ var cardPairs = ['fa-codepen', 'fa-codepen',
                  'fa-github', 'fa-github',
                  'fa-html5', 'fa-html5',
                  'fa-css3', 'fa-css3',
-                 'fa-andriod', 'fa-andriod',
+                 'fa-android', 'fa-android',
                 ];
 
+function buildCardDeck(theDeck) {
+    theCards = document.createDocumentFragment();
+    let li, i;
+    theDeck.forEach(function(card){
+        li = document.createElement('li');
+        li.classList.add('card');
+        li.setAttribute('data-card', card);
+        i = document.createElement('i');
+        i.classList.add('fa', card);
+        li.appendChild(i);
+        theCards.appendChild(li);        
+    });
+    return theCards;
+}
+
+function clearDeck() {
+    while(deck.hasChildNodes()) {
+        deck.removeChild(deck.lastChild);
+    }
+}
 
 
 /*
@@ -26,10 +46,15 @@ var cardPairs = ['fa-codepen', 'fa-codepen',
  *   - add each card's HTML to the page
  */
 
-function setupGame() {
+setupGame();
 
-// do stuff here
+ 
+function setupGame() {
+    clearDeck(); 
+    shuffle(cardPairs);
+    deck.appendChild(buildCardDeck(cardPairs));
 }
+
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -45,8 +70,6 @@ function shuffle(array) {
     return array;
 }
 
-
-
 /*
  * set up the event listener for a card. If a card is clicked:
  *  - display the card's symbol (put this functionality in another function that you call from this one)
@@ -61,12 +84,11 @@ function shuffle(array) {
 deck.addEventListener("click", function(event) {
     if(event.target.nodeName === "LI") {
 
-        // let's flip the card 
+// Let's flip the cards and have a look        
 
         if(event.target.classList.contains('match') ||
            event.target.classList.contains('open')  ||
            event.target.classList.contains('show')) {
-           alert("The card is already flipped brains!");
         } else {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
@@ -80,25 +102,15 @@ deck.addEventListener("click", function(event) {
                 // so either way open and show are removed and openCards is cleared
                 isMatch(openCards);
                 openCards = [];
-                // console.log(openCards);
             }
-            // isMatch() ? 
         }
     } else {
         // this is not an li which means it's not a card or its an open or matched card if it's an i or ul
     }
-
 }, false);
 
 function isMatch(cards) {
-    // console.log(cards);
-    // if the fa icons match then ..
-    cards.forEach(function(card) {
+   cards.forEach(function(card) {
         card.classList.remove('open', 'show');
-        // card.classList.add('match');
     });
-    // console.log(cards);
 }
-
-
-
