@@ -2,11 +2,11 @@
 // Define global constants
 
 const deck = document.getElementById('deck');
+var openCards = [];
 
 /*
  * Create a list that holds all of your cards
  */
-
 
 /*
  * Display the cards on the page
@@ -15,6 +15,10 @@ const deck = document.getElementById('deck');
  *   - add each card's HTML to the page
  */
 
+function setupGame() {
+
+// do stuff here
+}
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
@@ -44,20 +48,46 @@ function shuffle(array) {
  */
 
 deck.addEventListener("click", function(event) {
-    event.preventDefault();
     if(event.target.nodeName === "LI") {
-        // let's flip the card :)
+
+        // let's flip the card 
+
         if(event.target.classList.contains('match') ||
            event.target.classList.contains('open')  ||
            event.target.classList.contains('show')) {
-            console.log("already open");
+           alert("The card is already flipped brains!");
         } else {
-            console.log("not open");
             event.target.classList.add('open', 'show');
+            openCards.push(event.target);
+            if(openCards.length === 2) {
+                // is it a match?
+
+                // no? then we close both cards and clear openCards
+
+                // yes? then we remove open and show class and set match class on both cards and clear openCards
+
+                // so either way open and show are removed and openCards is cleared
+                isMatch(openCards);
+                openCards = [];
+                // console.log(openCards);
+            }
+            // isMatch() ? 
         }
-        console.log("li!");
     } else {
-        console.log(`not li, it's ${event.target.nodeName}`);
+        // this is not an li which means it's not a card or its an open or matched card if it's an i or ul
     }
 
 }, false);
+
+function isMatch(cards) {
+    // console.log(cards);
+    // if the fa icons match then ..
+    cards.forEach(function(card) {
+        card.classList.remove('open', 'show');
+        // card.classList.add('match');
+    });
+    // console.log(cards);
+}
+
+
+
