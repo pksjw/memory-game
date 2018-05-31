@@ -7,6 +7,17 @@ var openCards = [];
 /*
  * Create a list that holds all of your cards
  */
+var cardPairs = ['fa-codepen', 'fa-codepen',
+                 'fa-linux', 'fa-linux',
+                 'fa-google', 'fa-google',
+                 'fa-windows', 'fa-windows',
+                 'fa-github', 'fa-github',
+                 'fa-html5', 'fa-html5',
+                 'fa-css3', 'fa-css3',
+                 'fa-andriod', 'fa-andriod',
+                ];
+
+
 
 /*
  * Display the cards on the page
