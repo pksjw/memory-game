@@ -2,7 +2,8 @@
 // Define global constants
 
 const deck = document.getElementById('deck');
-var openCards = [];
+const restart = document.getElementById('restart');
+let openCards = [];
 
 /*
  * Create a list that holds all of your cards
@@ -93,15 +94,11 @@ deck.addEventListener("click", function(event) {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
             if(openCards.length === 2) {
-                // is it a match?
-
-                // no? then we close both cards and clear openCards
-
-                // yes? then we remove open and show class and set match class on both cards and clear openCards
-
-                // so either way open and show are removed and openCards is cleared
-                isMatch(openCards);
-                openCards = [];
+                if(openCards[0].dataset.card === openCards[1].dataset.card) {
+                   aMatch(openCards);
+                } else {
+                    window.setTimeout(() => closeCards(openCards, false), 850);
+                }
             }
         }
     } else {
@@ -109,8 +106,25 @@ deck.addEventListener("click", function(event) {
     }
 }, false);
 
-function isMatch(cards) {
-   cards.forEach(function(card) {
-        card.classList.remove('open', 'show');
+restart.addEventListener("click", function(event) {
+    // do what needs to be done to restart here
+    closeCards(openCards, true);
+    setupGame();
+
+}, false);
+
+function aMatch(cards) {
+    cards.forEach(function(card) {
+        card.classList.add('match');
+        closeCards(cards, false);
     });
+}
+
+function closeCards(cards, match) {
+    cards.forEach(function(card) {
+        card.classList.remove('open', 'show');
+        if(match) {card.classList.remove('match');}
+     });
+     openCards=[];
+
 }
