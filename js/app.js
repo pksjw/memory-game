@@ -4,6 +4,7 @@
 const deck = document.getElementById('deck');
 const restart = document.getElementById('restart');
 const moves = document.getElementById('moves');
+const stars = document.querySelectorAll('.fa-star');
 
 // Define globals
 
@@ -59,6 +60,8 @@ function setupGame() {
     clearDeck(); 
     shuffle(cardPairs);
     deck.appendChild(buildCardDeck(cardPairs));
+    moved(true);
+    startGameTimer();
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -98,12 +101,13 @@ deck.addEventListener("click", function(event) {
         } else {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
-            moved();
             if(openCards.length === 2) {
+                moved();
+                starRating();
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
                    aMatch(openCards);
                 } else {
-                    window.setTimeout(() => closeCards(openCards, false), 850);
+                    window.setTimeout(() => closeCards(openCards, false), 800);
                 }
             }
         }
@@ -115,12 +119,9 @@ deck.addEventListener("click", function(event) {
 restart.addEventListener("click", function(event) {
     // do what needs to be done to restart here
     closeCards(openCards, true);
-    moved(true);
     setupGame();
 
 }, false);
-
-
 
 function aMatch(cards) {
     cards.forEach(function(card) {
@@ -141,4 +142,55 @@ function closeCards(cards, match) {
 function moved(reset) {
     reset ? moveCount=0 : moveCount +=1;
     moves.innerText = moveCount;
+}
+
+function starRating() {
+    console.log(moveCount);
+    switch(moveCount) {
+        case 12:
+            //change star four to half star
+            starChange(3, 'h');
+            break;
+        case 14:
+            //change star four to empty star
+            starChange(3, 'e');
+            break;
+        case 16:
+            //change star three to half star
+            starChange(2, 'h');
+            break;
+        case 17:
+            //change star three to empty star
+            starChange(2, 'e');
+            break;
+        case 19:
+            //change star two to half star
+            starChange(1, 'h');
+            break;
+        case 20:
+            //change star two to empty star
+            starChange(1, 'e');
+            break;
+        case 22:
+            //change star one to half star
+            starChange(0, 'h');
+            break;
+        case 23:
+            //change star one to empty star...what a loser lol
+            starChange(0, 'e');
+            break;
+    }
+}
+
+// flag = h - half, e - empty or any other value - full star
+
+function starChange(star, flag){
+    stars[star].classList.remove(flag === 'h' ? 'fa-star' :
+                                 flag === 'e' ? 'fa-star-half-o' : 'fa-star-o');
+    stars[star].classList.add(flag === 'h' ? 'fa-star-half-o' :
+                              flag === 'e' ? 'fa-star-o' : 'fa-star');
+}
+
+function startGameTimer() {
+    
 }

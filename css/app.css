@@ -87,8 +87,7 @@ h1 {
 
 .score-panel {
     text-align: left;
-    width: 345px;
-    /* margin-bottom: 10px; */
+    width: 355px;
     margin: 0;
 }
 
@@ -103,8 +102,15 @@ h1 {
     display: inline-block;
 }
 
+
+.score-pannel .timer-control {
+    float: right;
+    cursor: pointer;
+}
 .score-panel .restart {
     float: right;
     cursor: pointer;
     padding: 0.75em;
 }
+
+
