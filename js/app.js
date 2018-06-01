@@ -3,7 +3,12 @@
 
 const deck = document.getElementById('deck');
 const restart = document.getElementById('restart');
+const moves = document.getElementById('moves');
+
+// Define globals
+
 let openCards = [];
+let moveCount = 0;
 
 /*
  * Create a list that holds all of your cards
@@ -93,6 +98,7 @@ deck.addEventListener("click", function(event) {
         } else {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
+            moved();
             if(openCards.length === 2) {
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
                    aMatch(openCards);
@@ -109,9 +115,12 @@ deck.addEventListener("click", function(event) {
 restart.addEventListener("click", function(event) {
     // do what needs to be done to restart here
     closeCards(openCards, true);
+    moved(true);
     setupGame();
 
 }, false);
+
+
 
 function aMatch(cards) {
     cards.forEach(function(card) {
@@ -127,4 +136,9 @@ function closeCards(cards, match) {
      });
      openCards=[];
 
+}
+
+function moved(reset) {
+    reset ? moveCount=0 : moveCount +=1;
+    moves.innerText = moveCount;
 }
