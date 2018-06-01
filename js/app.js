@@ -8,7 +8,7 @@ const stars = document.querySelectorAll('.fa-star');
 
 // Define globals
 
-let openCards = [];
+let openCards = []; // Thanks to Mike Wales
 let moveCount = 0;
 
 /*
@@ -30,7 +30,7 @@ function buildCardDeck(theDeck) {
     theDeck.forEach(function(card){
         li = document.createElement('li');
         li.classList.add('card');
-        li.setAttribute('data-card', card);
+        li.setAttribute('data-card', card); // Thanks to Mike Wales 
         i = document.createElement('i');
         i.classList.add('fa', card);
         li.appendChild(i);
@@ -117,10 +117,9 @@ deck.addEventListener("click", function(event) {
 }, false);
 
 restart.addEventListener("click", function(event) {
-    // do what needs to be done to restart here
     closeCards(openCards, true);
+    for(let i = 0; i <=3; i++) {starChange(i);}
     setupGame();
-
 }, false);
 
 function aMatch(cards) {
@@ -136,7 +135,6 @@ function closeCards(cards, match) {
         if(match) {card.classList.remove('match');}
      });
      openCards=[];
-
 }
 
 function moved(reset) {
