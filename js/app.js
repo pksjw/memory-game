@@ -5,11 +5,15 @@ const deck = document.getElementById('deck');
 const restart = document.getElementById('restart');
 const moves = document.getElementById('moves');
 const stars = document.querySelectorAll('.fa-star');
+const timer = document.getElementById('timer');
 
 // Define globals
 
 let openCards = []; // Thanks to Mike Wales
 let moveCount = 0;
+let gameTimerIntervalID = 0;
+let seconds = 0;
+
 
 /*
  * Create a list that holds all of your cards
@@ -61,7 +65,8 @@ function setupGame() {
     shuffle(cardPairs);
     deck.appendChild(buildCardDeck(cardPairs));
     moved(true);
-    startGameTimer();
+    seconds = 0;
+    gameTimerIntervalID = window.setInterval(gameTimer, 1000);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -119,6 +124,7 @@ deck.addEventListener("click", function(event) {
 restart.addEventListener("click", function(event) {
     closeCards(openCards, true);
     for(let i = 0; i <=3; i++) {starChange(i);}
+    window.clearInterval(gameTimerIntervalID);
     setupGame();
 }, false);
 
@@ -189,6 +195,7 @@ function starChange(star, flag){
                               flag === 'e' ? 'fa-star-o' : 'fa-star');
 }
 
-function startGameTimer() {
-    
+function gameTimer() {
+    seconds += 1;
+    timer.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`; 
 }
