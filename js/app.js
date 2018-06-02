@@ -6,6 +6,8 @@ const restart = document.getElementById('restart');
 const moves = document.getElementById('moves');
 const stars = document.querySelectorAll('.fa-star');
 const timer = document.getElementById('timer');
+const modal = document.getElementById('youWinModal');
+const modalClose = document.getElementById('modalClose');
 
 // Define globals
 
@@ -127,6 +129,14 @@ restart.addEventListener("click", function(event) {
     window.clearInterval(gameTimerIntervalID);
     setupGame();
 }, false);
+
+window.addEventListener("click", function(event){
+    if(event.target == modal) {
+        modal.style.display = "none";
+    }
+});
+
+modalClose.addEventListener("click", event => {modal.style.display = 'none';});
 
 function aMatch(cards) {
     cards.forEach(function(card) {
