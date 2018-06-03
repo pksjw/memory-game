@@ -16,9 +16,10 @@
         </header>
 
         <section class="score-panel">
-        	<ul id="stars" class="stars">
+        	<ul class="stars">
         		<li><i class="fa fa-star"></i></li>
         		<li><i class="fa fa-star"></i></li>
+                <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
                 <li><i class="fa fa-star"></i></li>
         	</ul>
@@ -90,7 +91,10 @@
          <div id="youWinModal" class="modal">
             <div class="modal-content">
                 <span id="modalClose" class="modal-close">&times;</span>
-                <p>You win fool!</p>
+                <p>Congratulations! You won the game!</p>
+                <span>Your star rating is:</span>
+                <ul id="ulForModal" class="stars"></ul>
+                <p> It took you: <span id="winTime"></span> to win!</p>  
             </div>
         </div>
 

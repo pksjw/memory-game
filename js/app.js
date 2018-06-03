@@ -4,15 +4,18 @@
 const deck = document.getElementById('deck');
 const restart = document.getElementById('restart');
 const moves = document.getElementById('moves');
-const stars = document.querySelectorAll('.fa-star');
+const stars = document.querySelectorAll('.score-panel .fa-star');
 const timer = document.getElementById('timer');
 const modal = document.getElementById('youWinModal');
 const modalClose = document.getElementById('modalClose');
+const ulForModal = document.getElementById('ulForModal');
+const winTime = document.getElementById('winTime');
 
 // Define globals
 
 let openCards = []; // Thanks to Mike Wales
 let moveCount = 0;
+let matchCount = 0;
 let gameTimerIntervalID = 0;
 let seconds = 0;
 
@@ -45,12 +48,11 @@ function buildCardDeck(theDeck) {
     return theCards;
 }
 
-function clearDeck() {
-    while(deck.hasChildNodes()) {
-        deck.removeChild(deck.lastChild);
+function clearChildren(theParent) {
+    while(theParent.hasChildNodes()) {
+        theParent.removeChild(theParent.lastChild);
     }
 }
-
 
 /*
  * Display the cards on the page
@@ -60,13 +62,13 @@ function clearDeck() {
  */
 
 setupGame();
-
  
 function setupGame() {
-    clearDeck(); 
+    clearChildren(deck); 
     shuffle(cardPairs);
     deck.appendChild(buildCardDeck(cardPairs));
     moved(true);
+    matchCount = 0;
     seconds = 0;
     gameTimerIntervalID = window.setInterval(gameTimer, 1000);
 }
@@ -97,8 +99,8 @@ function shuffle(array) {
  *    + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
  */
 
-deck.addEventListener("click", function(event) {
-    if(event.target.nodeName === "LI") {
+deck.addEventListener('click', function(event) {
+    if(event.target.nodeName === 'LI') { //TODO: && OC !==2...third card
 
 // Let's flip the cards and have a look        
 
@@ -112,7 +114,8 @@ deck.addEventListener("click", function(event) {
                 moved();
                 starRating();
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
-                   aMatch(openCards);
+                    aMatch(openCards);
+                    if(matchCount === 8) { gameWon(); }
                 } else {
                     window.setTimeout(() => closeCards(openCards, false), 800);
                 }
@@ -123,26 +126,25 @@ deck.addEventListener("click", function(event) {
     }
 }, false);
 
-restart.addEventListener("click", function(event) {
+restart.addEventListener('click', event => { restartGame(); }, false);
+
+function restartGame() {
     closeCards(openCards, true);
     for(let i = 0; i <=3; i++) {starChange(i);}
     window.clearInterval(gameTimerIntervalID);
     setupGame();
-}, false);
+}
 
-window.addEventListener("click", function(event){
-    if(event.target == modal) {
-        modal.style.display = "none";
-    }
-});
+window.addEventListener('click', event => { if(event.target == modal){ closeModal(); } });
 
-modalClose.addEventListener("click", event => {modal.style.display = 'none';});
+modalClose.addEventListener('click', event => { closeModal(); });
 
 function aMatch(cards) {
     cards.forEach(function(card) {
         card.classList.add('match');
         closeCards(cards, false);
     });
+    matchCount += 1;
 }
 
 function closeCards(cards, match) {
@@ -157,41 +159,32 @@ function moved(reset) {
     reset ? moveCount=0 : moveCount +=1;
     moves.innerText = moveCount;
 }
-
+// TODO: fix bug when it was star half star and full star
 function starRating() {
-    console.log(moveCount);
     switch(moveCount) {
         case 12:
-            //change star four to half star
-            starChange(3, 'h');
+            starChange(4, 'h');
             break;
         case 14:
-            //change star four to empty star
-            starChange(3, 'e');
+            starChange(4, 'e');
             break;
         case 16:
-            //change star three to half star
-            starChange(2, 'h');
+            starChange(3, 'h');
             break;
         case 17:
-            //change star three to empty star
-            starChange(2, 'e');
+            starChange(3, 'e');
             break;
         case 19:
-            //change star two to half star
-            starChange(1, 'h');
+            starChange(2, 'h');
             break;
         case 20:
-            //change star two to empty star
-            starChange(1, 'e');
+            starChange(2, 'e');
             break;
         case 22:
-            //change star one to half star
-            starChange(0, 'h');
+            starChange(1, 'h');
             break;
         case 23:
-            //change star one to empty star...what a loser lol
-            starChange(0, 'e');
+            starChange(1, 'e');
             break;
     }
 }
@@ -207,5 +200,26 @@ function starChange(star, flag){
 
 function gameTimer() {
     seconds += 1;
-    timer.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`; 
+    // timer.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`; 
+    displayTimer(timer);
+}
+
+function displayTimer(location) {
+    location.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;   
+}
+
+function gameWon() {
+    window.clearInterval(gameTimerIntervalID);
+    gameTimerIntervalID = 0;
+    stars.forEach(function(star) {
+        let el = star.parentElement.cloneNode(true);
+        ulForModal.appendChild(el);
+    });
+    displayTimer(winTime);
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    clearChildren(ulForModal);
 }

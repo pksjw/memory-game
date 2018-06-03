@@ -21,16 +21,21 @@ body {
     font-family: 'Coda', cursive;
 }
 
+h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-}
-
-h1 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 300;
 }
 
 /*
@@ -102,7 +107,6 @@ h1 {
     display: inline-block;
 }
 
-
 .score-pannel .timer-control {
     float: right;
     cursor: pointer;
@@ -126,14 +130,27 @@ h1 {
     overflow: auto;
     background-color: #000;
     background-color: rgba(0,0,0,0.4);
+    text-align: center;
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 1.5em;
-    border: 1px solid #888;
-    width: 80%;
+    border: 2px solid #888;
+    border-radius: 0.5em;
+    width: 50%;
+    font-size: 1.5em;
+    text-shadow: 2px 2px 3px #aaa;
+}
+
+.modal-content .stars {
+    margin: 0.25em 0 0 0;
+}
+
+.modal-content .stars li {
+    list-style: none;
+    display: inline-block;
 }
 
 .modal-close {
@@ -141,6 +158,7 @@ h1 {
     float: right;
     font-size: 2em;
     font-weight: bold;
+    margin: -0.85em -0.45em 0 0;
 }
 
 .modal-close:hover,
