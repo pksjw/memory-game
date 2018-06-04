@@ -31,6 +31,21 @@ ul {
     padding: 0;
     
 }
+
+button {
+    background-color: #fafefb;
+    border: 2px solid #179c52;
+    border-radius: 0.25em;
+    font-size: 1em;
+    padding: 0.5em;
+    margin: 0 0.5em 0 0.5em;
+}
+
+button:hover {
+    background-color: #179c52;
+    color: #fafefb;
+}
+
 .container {
     display: flex;
     justify-content: center;
@@ -134,8 +149,9 @@ ul {
 }
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 10% auto;
+    background-color: #fafefb;
+    background-color: rgba(250,254,251,0.85);
+    margin: 14% auto;
     padding: 1.5em;
     border: 2px solid #888;
     border-radius: 0.5em;

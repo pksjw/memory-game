@@ -10,6 +10,7 @@ const modal = document.getElementById('youWinModal');
 const modalClose = document.getElementById('modalClose');
 const ulForModal = document.getElementById('ulForModal');
 const winTime = document.getElementById('winTime');
+const again = document.getElementById('again');
 
 // Define globals
 
@@ -130,14 +131,21 @@ restart.addEventListener('click', event => { restartGame(); }, false);
 
 function restartGame() {
     closeCards(openCards, true);
-    for(let i = 0; i <=3; i++) {starChange(i);}
+    for(let i = 0; i <=4; i++) {starChange(i);}
     window.clearInterval(gameTimerIntervalID);
+    seconds = 0;
+    displayTimer(timer);
     setupGame();
 }
 
 window.addEventListener('click', event => { if(event.target == modal){ closeModal(); } });
 
 modalClose.addEventListener('click', event => { closeModal(); });
+
+again.addEventListener('click', event => {
+     closeModal();
+     restartGame();
+}, false);
 
 function aMatch(cards) {
     cards.forEach(function(card) {
@@ -159,7 +167,6 @@ function moved(reset) {
     reset ? moveCount=0 : moveCount +=1;
     moves.innerText = moveCount;
 }
-// TODO: fix bug when it was star half star and full star
 function starRating() {
     switch(moveCount) {
         case 12:
