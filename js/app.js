@@ -131,7 +131,7 @@ restart.addEventListener('click', event => { restartGame(); }, false);
 
 function restartGame() {
     closeCards(openCards, true);
-    for(let i = 0; i <=4; i++) {starChange(i);}
+    for(let i = 0; i <=4; i++) {starChange(i, "f");}
     window.clearInterval(gameTimerIntervalID);
     seconds = 0;
     displayTimer(timer);
@@ -199,8 +199,9 @@ function starRating() {
 // flag = h - half, e - empty or any other value - full star
 
 function starChange(star, flag){
-    stars[star].classList.remove(flag === 'h' ? 'fa-star' :
-                                 flag === 'e' ? 'fa-star-half-o' : 'fa-star-o');
+    // stars[star].classList.remove(flag === 'h' ? 'fa-star' :
+    //                              flag === 'e' ? 'fa-star-half-o' : 'fa-star-o');
+    stars[star].classList.remove('fa-star', 'fa-star-half-o', 'fa-star-o');
     stars[star].classList.add(flag === 'h' ? 'fa-star-half-o' :
                               flag === 'e' ? 'fa-star-o' : 'fa-star');
 }
