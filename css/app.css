@@ -14,6 +14,7 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    color: #1a1a1a;
 }
 
 body {
@@ -24,6 +25,25 @@ body {
 h1 {
     font-family: 'Open Sans', sans-serif;
     font-weight: 300;
+    text-shadow: 2px 2px 4px #ccc;
+    font-size: 2.5em;
+}
+
+/* Google colors */
+h1 span:first-child {
+    color: #db4437;
+}
+
+h1 span:nth-child(2) {
+    color: #f4b400;
+}
+
+h1 span:nth-child(3) {
+    color: #0f9d58;
+}
+
+h1 span:last-child {
+    color: #4285f4;
 }
 
 ul {
@@ -34,7 +54,7 @@ ul {
 
 button {
     background-color: #fafefb;
-    border: 2px solid #179c52;
+    border: 2px solid #0f9d58;
     border-radius: 0.25em;
     font-size: 1em;
     padding: 0.5em;
@@ -42,7 +62,7 @@ button {
 }
 
 button:hover {
-    background-color: #179c52;
+    background-color: #0f9d58;
     color: #fafefb;
 }
 
@@ -60,7 +80,7 @@ button:hover {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(160deg, #02ccba 0%, #aa7ecd 100%);
+    background: linear-gradient(145deg, #ea4335 20%, #f8bc05 45%, #34a853 60%, #4285f4 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -87,7 +107,7 @@ button:hover {
 
 .deck .card.open {
     transform: rotateY(0);
-    background: #02b3e4;
+    background: #db4437;
     cursor: default;
 }
 
@@ -97,7 +117,7 @@ button:hover {
 
 .deck .card.match {
     cursor: default;
-    background: #02ccba;
+    background: #4285f4;
     font-size: 33px;
 }
 
@@ -107,8 +127,9 @@ button:hover {
 
 .score-panel {
     text-align: left;
-    width: 355px;
+    width: 375px;
     margin: 0;
+    font-size: 1em;
 }
 
 .score-panel .stars {
@@ -120,6 +141,8 @@ button:hover {
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
+    color: #f4b400;
+    font-weight: 900;
 }
 
 .score-pannel .timer-control {
@@ -132,7 +155,14 @@ button:hover {
     padding: 0.75em;
 }
 
-/* Modal to display the Winner message */
+.score-panel .restart:hover {
+    color: #0f9d58;
+    font-weight: 900;
+}
+
+/* Modal to display the Winner message 
+   Thank you www.w3schools.com for modal
+   help */
 
 .modal {
     display: none;
@@ -143,8 +173,8 @@ button:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: #000;
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgb(26,26,26);
+    background-color: rgba(26,26,26,0.4);
     text-align: center;
 }
 
@@ -153,11 +183,11 @@ button:hover {
     background-color: rgba(250,254,251,0.85);
     margin: 14% auto;
     padding: 1.5em;
-    border: 2px solid #888;
+    border: 3px solid #0f9d58;
     border-radius: 0.5em;
     width: 50%;
     font-size: 1.5em;
-    text-shadow: 2px 2px 3px #aaa;
+    text-shadow: 2px 2px 3px #ccc;
 }
 
 .modal-content .stars {
@@ -167,6 +197,9 @@ button:hover {
 .modal-content .stars li {
     list-style: none;
     display: inline-block;
+    color: #f4b400;
+    font-weight: 900;
+
 }
 
 .modal-close {
@@ -179,7 +212,7 @@ button:hover {
 
 .modal-close:hover,
 .modal-close:focus {
-    color:black;
+    color:#4285f4;
     text-decoration: none;
     cursor: pointer;
 }
