@@ -126,15 +126,14 @@ button:hover {
  */
 
 .score-panel {
-    text-align: left;
+    display: flex;
+    flex-direction: row nowrap;
+    justify-content: space-evenly;
     width: 375px;
-    margin: 0;
     font-size: 1em;
 }
 
 .score-panel .stars {
-    padding: 0.75em;
-    display: inline-block;
     margin: 0 5px 0 0;
 }
 
@@ -146,13 +145,10 @@ button:hover {
 }
 
 .score-pannel .timer-control {
-    float: right;
     cursor: pointer;
 }
 .score-panel .restart {
-    float: right;
     cursor: pointer;
-    padding: 0.75em;
 }
 
 .score-panel .restart:hover {
