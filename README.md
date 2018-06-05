@@ -5,6 +5,7 @@
 * [Instructions](#instructions)
 * [Contributing](#contributing)
 * [Game Play](#Game Play)
+* [Dependencies](#dependencies)
 
 ## Instructions
 
@@ -25,3 +26,8 @@ For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
 Welcome to the Memory Game. The object of this game is to match 8 pairs of cards with as few moves as possible and to do it as quickly as possible. You can open a card by clicking on a card that is not flipped yet (click on on the card rectangles). The card will be _flipped_ over. Flipping another card will reveal the card pair. If they match, the card pair will remain open. If not, the card pair will close. Continue to flip the card pairs and try and remember where any unmatched cards are located. Once you match all 8 pairs you *Win* the game! Try and complete the game as fast as you can. Just above the card deck you will see the score panel where you can see the number of moves, current star rating and the game timer.
 
 Happy matching!
+
+## Dependencies
+
+[Font Awesome 4.6.1](https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css)
+[Google Fonts Coda](https://fonts.googleapis.com/css?family=Coda)
