@@ -80,7 +80,7 @@ button:hover {
 .deck {
     width: 660px;
     min-height: 680px;
-    background: linear-gradient(145deg, #ea4335 20%, #f8bc05 45%, #34a853 60%, #4285f4 100%);
+    background: linear-gradient(145deg, #ea4335 20%, #f8bc05 45%, #34a853 65%, #4285f4 100%);
     padding: 32px;
     border-radius: 10px;
     box-shadow: 12px 15px 20px 0 rgba(46, 61, 73, 0.5);
@@ -96,7 +96,7 @@ button:hover {
     width: 125px;
     background: #2e3d49;
     font-size: 0;
-    color: #ffffff;
+    color: #fafefb;
     border-radius: 8px;
     cursor: pointer;
     display: flex;
@@ -129,12 +129,8 @@ button:hover {
     display: flex;
     flex-direction: row nowrap;
     justify-content: space-evenly;
-    width: 375px;
-    font-size: 1em;
-}
-
-.score-panel .stars {
-    margin: 0 5px 0 0;
+    width: 410px;
+    font-size: 1.25em;
 }
 
 .score-panel .stars li {
@@ -144,9 +140,6 @@ button:hover {
     font-weight: 900;
 }
 
-.score-pannel .timer-control {
-    cursor: pointer;
-}
 .score-panel .restart {
     cursor: pointer;
 }

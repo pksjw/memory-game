@@ -101,7 +101,7 @@ function shuffle(array) {
  */
 
 deck.addEventListener('click', function(event) {
-    if(event.target.nodeName === 'LI') { //TODO: && OC !==2...third card
+    if(event.target.nodeName === 'LI') {
 
 // Let's flip the cards and have a look        
 
@@ -118,7 +118,7 @@ deck.addEventListener('click', function(event) {
                     aMatch(openCards);
                     if(matchCount === 8) { gameWon(); }
                 } else {
-                    window.setTimeout(() => closeCards(openCards, false), 800);
+                    window.setTimeout(() => closeCards(openCards), 750);
                 }
             }
         }
@@ -130,7 +130,7 @@ deck.addEventListener('click', function(event) {
 restart.addEventListener('click', event => { restartGame(); }, false);
 
 function restartGame() {
-    closeCards(openCards, true);
+    openCards = [];
     for(let i = 0; i <=4; i++) {starChange(i, "f");}
     window.clearInterval(gameTimerIntervalID);
     seconds = 0;
@@ -148,19 +148,14 @@ again.addEventListener('click', event => {
 }, false);
 
 function aMatch(cards) {
-    cards.forEach(function(card) {
-        card.classList.add('match');
-        closeCards(cards, false);
-    });
+    for(let i = 0; i < 2; i++) { cards[i].classList.add('match'); }     
+    closeCards(cards);
     matchCount += 1;
 }
 
-function closeCards(cards, match) {
-    cards.forEach(function(card) {
-        card.classList.remove('open', 'show');
-        if(match) {card.classList.remove('match');}
-     });
-     openCards=[];
+function closeCards(cards) {
+    for(let i = 0; i < 2; i++) { cards[i].classList.remove('open', 'show'); }
+    openCards.splice(0,2);
 }
 
 function moved(reset) {
@@ -208,7 +203,6 @@ function starChange(star, flag){
 
 function gameTimer() {
     seconds += 1;
-    // timer.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`; 
     displayTimer(timer);
 }
 
