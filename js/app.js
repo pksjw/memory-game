@@ -1,16 +1,10 @@
 
 // Define global constants
 
-const deck = document.getElementById('deck');
 const restart = document.getElementById('restart');
-const moves = document.getElementById('moves');
 const stars = document.querySelectorAll('.score-panel .fa-star');
-const timer = document.getElementById('timer');
 const modal = document.getElementById('youWinModal');
-const modalClose = document.getElementById('modalClose');
 const ulForModal = document.getElementById('ulForModal');
-const winTime = document.getElementById('winTime');
-const again = document.getElementById('again');
 
 // Define globals
 
@@ -20,21 +14,8 @@ let matchCount = 0;
 let gameTimerIntervalID = 0;
 let seconds = 0;
 
-
-/*
- * Create a list that holds all of your cards
- */
-var cardPairs = ['fa-codepen', 'fa-codepen',
-                 'fa-linux', 'fa-linux',
-                 'fa-google', 'fa-google',
-                 'fa-windows', 'fa-windows',
-                 'fa-github', 'fa-github',
-                 'fa-html5', 'fa-html5',
-                 'fa-css3', 'fa-css3',
-                 'fa-android', 'fa-android',
-                ];
-
 function buildCardDeck(theDeck) {
+    const deck = document.getElementById('deck');
     theCards = document.createDocumentFragment();
     let li, i;
     theDeck.forEach(function(card){
@@ -65,13 +46,30 @@ function clearChildren(theParent) {
 setupGame();
  
 function setupGame() {
+    const moves = document.getElementById('moves');
+    const timer = document.getElementById('timer');
+/*
+ * Create a list that holds all of the cards
+ */
+    let cardPairs = ['fa-codepen', 'fa-codepen',
+                     'fa-linux', 'fa-linux',
+                     'fa-google', 'fa-google',
+                     'fa-windows', 'fa-windows',
+                     'fa-github', 'fa-github',
+                     'fa-html5', 'fa-html5',
+                     'fa-css3', 'fa-css3',
+                     'fa-android', 'fa-android',
+                    ];
     clearChildren(deck); 
     shuffle(cardPairs);
     deck.appendChild(buildCardDeck(cardPairs));
     moved(true);
     matchCount = 0;
     seconds = 0;
-    gameTimerIntervalID = window.setInterval(gameTimer, 1000);
+    gameTimerIntervalID = window.setInterval(() => {
+        seconds += 1;
+        displayTimer(timer);
+        }, 1000);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -103,7 +101,7 @@ function shuffle(array) {
 deck.addEventListener('click', function(event) {
     if(event.target.nodeName === 'LI') {
 
-// Let's flip the cards and have a look        
+// Let's flip the cards and have a look    
 
         if(event.target.classList.contains('match') ||
            event.target.classList.contains('open')  ||
@@ -111,6 +109,8 @@ deck.addEventListener('click', function(event) {
         } else {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
+            /* Process cards in pairs. This allows for opening more than two at a time by
+               the click happy. However, each pair of cards will be processed as a unit. */
             if(openCards.length === 2) {
                 moved();
                 starRating();
@@ -140,18 +140,22 @@ function restartGame() {
 
 window.addEventListener('click', event => { if(event.target == modal){ closeModal(); } });
 
-modalClose.addEventListener('click', event => { closeModal(); });
+document.getElementById('modalClose').addEventListener('click', event => { closeModal(); });
 
-again.addEventListener('click', event => {
+document.getElementById('again').addEventListener('click', event => {
      closeModal();
      restartGame();
 }, false);
+
+// process cards in pairs.
 
 function aMatch(cards) {
     for(let i = 0; i < 2; i++) { cards[i].classList.add('match'); }     
     closeCards(cards);
     matchCount += 1;
 }
+
+// Process cards in pairs. 
 
 function closeCards(cards) {
     for(let i = 0; i < 2; i++) { cards[i].classList.remove('open', 'show'); }
@@ -162,6 +166,7 @@ function moved(reset) {
     reset ? moveCount=0 : moveCount +=1;
     moves.innerText = moveCount;
 }
+
 function starRating() {
     switch(moveCount) {
         case 12:
@@ -194,16 +199,9 @@ function starRating() {
 // flag = h - half, e - empty or any other value - full star
 
 function starChange(star, flag){
-    // stars[star].classList.remove(flag === 'h' ? 'fa-star' :
-    //                              flag === 'e' ? 'fa-star-half-o' : 'fa-star-o');
     stars[star].classList.remove('fa-star', 'fa-star-half-o', 'fa-star-o');
     stars[star].classList.add(flag === 'h' ? 'fa-star-half-o' :
                               flag === 'e' ? 'fa-star-o' : 'fa-star');
-}
-
-function gameTimer() {
-    seconds += 1;
-    displayTimer(timer);
 }
 
 function displayTimer(location) {
@@ -217,6 +215,7 @@ function gameWon() {
         let el = star.parentElement.cloneNode(true);
         ulForModal.appendChild(el);
     });
+    const winTime = document.getElementById('winTime');
     displayTimer(winTime);
     modal.style.display = 'block';
 }
