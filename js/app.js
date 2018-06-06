@@ -115,7 +115,9 @@ deck.addEventListener('click', function(event) {
                 moved();
                 starRating();
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
-                    aMatch();
+                    for(let i = 0; i < 2; i++) { openCards[i].classList.add('match'); }     
+                    closeCards();
+                    matchCount += 1;               
                     if(matchCount === 8) { gameWon(); }
                 } else {
                     window.setTimeout(() => closeCards(), 800);
@@ -146,16 +148,6 @@ document.getElementById('again').addEventListener('click', event => {
      closeModal();
      restartGame();
 }, false);
-
-// process cards in pairs.
-
-function aMatch() {
-    for(let i = 0; i < 2; i++) { openCards[i].classList.add('match'); }     
-    closeCards();
-    matchCount += 1;
-}
-
-// Process cards in pairs. 
 
 function closeCards() {
     for(let i = 0; i < 2; i++) { openCards[i].classList.remove('open', 'show'); }
