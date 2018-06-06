@@ -217,11 +217,10 @@ function gameWon() {
     });
     const winTime = document.getElementById('winTime');
     displayTimer(winTime);
-    modal.style.display = 'block';
-    modal.classList.add('fly-in');
+    modal.classList.add('modal-display', 'fly-in');
 }
 
 function closeModal() {
-    modal.style.display = 'none';
+    modal.classList.remove('modal-display');
     clearChildren(ulForModal);
 }

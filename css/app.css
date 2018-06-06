@@ -223,6 +223,11 @@ button:hover {
     cursor: pointer;
 }
 
+.modal-display {
+    display: block;
+}
+
+
 /* Thank you css tips and tricks! */
 
 .fly-in {
