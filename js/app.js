@@ -218,6 +218,7 @@ function gameWon() {
     const winTime = document.getElementById('winTime');
     displayTimer(winTime);
     modal.style.display = 'block';
+    modal.classList.add('fly-in');
 }
 
 function closeModal() {
