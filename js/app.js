@@ -109,16 +109,16 @@ deck.addEventListener('click', function(event) {
         } else {
             event.target.classList.add('open', 'show');
             openCards.push(event.target);
-            /* Process cards in pairs. This allows for opening more than two at a time by
-               the click happy. However, each pair of cards will be processed as a unit. */
+            /* Process cards in pairs. css is used to disallow clicking more than two cards */
             if(openCards.length === 2) {
+                deck.classList.add('no-click');
                 moved();
                 starRating();
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
                     aMatch(openCards);
                     if(matchCount === 8) { gameWon(); }
                 } else {
-                    window.setTimeout(() => closeCards(openCards), 750);
+                    window.setTimeout(() => closeCards(openCards), 800);
                 }
             }
         }
@@ -160,6 +160,7 @@ function aMatch(cards) {
 function closeCards(cards) {
     for(let i = 0; i < 2; i++) { cards[i].classList.remove('open', 'show'); }
     openCards.splice(0,2);
+    deck.classList.remove('no-click');
 }
 
 function moved(reset) {

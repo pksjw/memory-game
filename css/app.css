@@ -89,6 +89,7 @@ button:hover {
     justify-content: space-between;
     align-items: center;
     margin: 0 0 3em;
+    pointer-events: auto;
 }
 
 .deck .card {
@@ -99,10 +100,15 @@ button:hover {
     color: #fafefb;
     border-radius: 8px;
     cursor: pointer;
+    pointer-events: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);
+}
+
+.deck .card i {
+    pointer-events: inherit;
 }
 
 .deck .card.open {
@@ -137,6 +143,11 @@ button:hover {
     90% { transform: translate(1px, 2px) rotate(0deg); }
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
+
+.no-click {
+    pointer-events: none;
+}
+
 
 /*
  * Styles for the Score Panel
