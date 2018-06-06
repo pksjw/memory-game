@@ -115,10 +115,10 @@ deck.addEventListener('click', function(event) {
                 moved();
                 starRating();
                 if(openCards[0].dataset.card === openCards[1].dataset.card) {
-                    aMatch(openCards);
+                    aMatch();
                     if(matchCount === 8) { gameWon(); }
                 } else {
-                    window.setTimeout(() => closeCards(openCards), 800);
+                    window.setTimeout(() => closeCards(), 800);
                 }
             }
         }
@@ -149,16 +149,16 @@ document.getElementById('again').addEventListener('click', event => {
 
 // process cards in pairs.
 
-function aMatch(cards) {
-    for(let i = 0; i < 2; i++) { cards[i].classList.add('match'); }     
-    closeCards(cards);
+function aMatch() {
+    for(let i = 0; i < 2; i++) { openCards[i].classList.add('match'); }     
+    closeCards();
     matchCount += 1;
 }
 
 // Process cards in pairs. 
 
-function closeCards(cards) {
-    for(let i = 0; i < 2; i++) { cards[i].classList.remove('open', 'show'); }
+function closeCards() {
+    for(let i = 0; i < 2; i++) { openCards[i].classList.remove('open', 'show'); }
     openCards.splice(0,2);
     deck.classList.remove('no-click');
 }
