@@ -66,10 +66,6 @@ function setupGame() {
     moved(true);
     matchCount = 0;
     seconds = 0;
-    gameTimerIntervalID = window.setInterval(() => {
-        seconds += 1;
-        displayTimer(timer);
-        }, 1000);
 }
 
 // Shuffle function from http://stackoverflow.com/a/2450976
@@ -99,6 +95,12 @@ function shuffle(array) {
  */
 
 deck.addEventListener('click', function(event) {
+    if(!gameTimerIntervalID) {
+        gameTimerIntervalID = window.setInterval(() => {
+            seconds += 1;
+            displayTimer(timer);
+            }, 1000);
+    }
     if(event.target.nodeName === 'LI') {
 
 // Let's flip the cards and have a look    
