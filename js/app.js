@@ -157,7 +157,8 @@ function closeCards() {
 
 function moved(reset) {
     reset ? moveCount=0 : moveCount +=1;
-    moves.innerText = moveCount;
+    // moves.innerText = moveCount;
+    moves.innerText =  `${moveCount.toString().padStart(2, "0")}`;   
 }
 
 function starRating() {
@@ -198,7 +199,7 @@ function starChange(star, flag){
 }
 
 function displayTimer(location) {
-    location.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;   
+    location.innerText = `${(Math.floor(seconds / 60)).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;
 }
 
 function gameWon() {

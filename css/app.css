@@ -161,6 +161,10 @@ button:hover {
     font-size: 1.25em;
 }
 
+.score-panel ul {
+    padding: 0 0.25em 0 0;
+}
+
 .score-panel .stars li {
     list-style: none;
     display: inline-block;
@@ -168,8 +172,14 @@ button:hover {
     font-weight: 900;
 }
 
+.score-panel .mono {
+    font-family: "Lucida Console", Monaco, monospace;
+    padding: 0.25em 0 0 0;
+}
+
 .score-panel .restart {
     cursor: pointer;
+    padding: 0 0 0 0.5em;
 }
 
 .score-panel .restart:hover {
